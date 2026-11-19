@@ -1,0 +1,25 @@
+grupo,parametro,valor,unidade,fonte_ou_justificativa
+horta,area_irrigada,150,m2,Premissa do grupo: horta comunitária com cerca de 30 canteiros de 1 x 5 m
+horta,eto_media_anual,4.4,mm/dia,"Embrapa Hortaliças (Marouelli e Braga): ETo de 4,4 mm/dia para temperatura média de 20 °C e UR de 70%; São Paulo tem média anual de 20,2 °C (INMET). Valor conservador"
+horta,kc_hortalicas,1.0,adimensional,Coeficiente de cultivo típico de hortaliças em fase de desenvolvimento pleno (FAO-56); simplificação para a horta inteira
+horta,eficiencia_gotejamento,0.90,adimensional,Eficiência típica de irrigação localizada por gotejamento (Embrapa)
+rede,tarifa_b1_2025_sem_tributos,0.72518,R$/kWh,"Enel SP: tarifa B1 residencial de R$ 725,18/MWh no reajuste de 2025 (ANEEL)"
+rede,reajuste_2026_baixa_tensao,0.0897,fracao,"ANEEL: área técnica estimou reajuste de 8,97% para a baixa tensão da Enel SP em 2026"
+rede,fator_tributos,1.298,multiplicador,ICMS 18% + PIS/COFINS: razão entre tarifa com e sem tributos em fatura Enel SP de fev/2026
+rede,custo_disponibilidade_monofasico,30,kWh/mes,REN ANEEL 1.000/2021 art. 291: consumidor monofásico paga no mínimo 30 kWh/mês
+rede,custo_padrao_entrada_monofasico,1800,R$,Valor de referência 2026 para padrão de entrada monofásico simples (a partir de R$ 1.800)
+rede,fator_emissao_sin,0.0247,kgCO2/kWh,"MCTI/SIRENE: média de jan a abr/2025 (23,7; 24,8; 21,5; 28,9 kg CO2/MWh)"
+A1_A2,bomba_periferica_potencia,370,W,Bomba periférica 1/2 cv (370 W) - catálogos de fabricantes
+A1_A2,bomba_periferica_vazao_operacao,1500,L/h,Premissa: cerca de 60% da vazão máxima de catálogo (2.400 L/h) para elevar a água cerca de 10 m.c.a. até a caixa elevada
+A1_A2,bomba_periferica_preco,210,R$,Faixa de R$ 160 a R$ 260 em lojas online (nov/2026)
+A1,timer_preco,40,R$,Estimativa de mercado para timer analógico de tomada
+A2_A3,esp32_sensores_potencia_media,0.5,W,Premissa: ESP32 + sensores do projeto de Arquitetura com ciclo de 5 min (valor conservador)
+A2_A3,esp32_sensores_preco,150,R$,Estimativa: ESP32 DevKit + sensor capacitivo + BME280 + BH1750 + INA219 (corrente/tensão) + boia de nível + módulo MOSFET
+A3,bomba_solar_potencia,100,W,Bomba 12 V de diafragma 100 W (catálogo: 480 L/h)
+A3,bomba_solar_vazao,480,L/h,Catálogo de bomba solar 12 V 100 W
+A3,bomba_solar_preco,350,R$,Estimativa de mercado (nov/2026)
+A3,painel_potencia,100,Wp,Kit painel 100 Wp + controlador PWM 30 A + cabos MC4
+A3,kit_painel_preco,994,R$,Preço de kit painel 100 W + controlador 30 A + cabos MC4 em loja online (2026)
+A3,performance_ratio,0.70,adimensional,"Premissa conservadora para sistema pequeno off-grid com controlador PWM (perdas de temperatura, cabos e controlador)"
+A3,bateria_preco,100,R$,Estimativa: bateria VRLA 12 V 7 Ah para o ESP32 à noite e reserva de 2 dias
+A3,bateria_vida_util,36,meses,Premissa: troca da bateria a cada 3 anos

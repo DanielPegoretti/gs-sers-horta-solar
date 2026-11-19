@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neighborhood Action Dashboard — SERS: Horta Comunitária Solar</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <div class="tag">Global Solution 2026.2 • CitizenTech • Neighborhood Action Dashboard • Contribuição de SERS</div>
+  <h1>Horta comunitária com bombeamento solar</h1>
+  <p>Comparação de três formas de irrigar uma horta comunitária de 150 m² em São Paulo (SP): bomba na rede com timer,
+     bomba na rede com sensores e bomba solar com sensores. Os indicadores abaixo vêm dos cálculos do repositório.</p>
+  <div class="integrantes">Daniel Rodrigues Pegoretti de Almeida (RM 574898) • Gabriel Oliveira Fernandes da Costa (RM 574826) •
+    Ciência da Computação — 1CCPB • Soluções em Energias Renováveis e Sustentáveis</div>
+</header>
+<nav>
+  <a href="#indicadores">Indicadores</a>
+  <a href="#graficos">Gráficos mensais</a>
+  <a href="#comparacao">Comparação</a>
+  <a href="#simulador">Simulador</a>
+  <a href="#monitoramento">Monitoramento</a>
+  <a href="#diagrama">Diagrama</a>
+  <a href="#premissas">Premissas e fontes</a>
+</nav>
+
+<main>
+  <div class="aviso"><b>Projeções, não resultados garantidos.</b> Os valores dependem das premissas listadas em
+    “Premissas e fontes” (área, clima médio, tarifa, potência dos equipamentos). A seção “Monitoramento” usa dados simulados.</div>
+
+  <section id="indicadores">
+    <h2>Indicadores de eficiência e sustentabilidade</h2>
+    <p class="sub">Comparação com a alternativa convencional (A1: bomba de 370 W na rede, com timer fixo). Escolha a alternativa:</p>
+    <div class="seletor" id="seletorAlt">
+      <button data-alt="A3" class="ativo">A3 • Solar + sensores (proposta)</button>
+      <button data-alt="A2">A2 • Rede + sensores</button>
+    </div>
+    <div class="grid kpis" id="kpis"></div>
+  </section>
+
+  <section id="graficos">
+    <h2>Energia, geração solar e água mês a mês</h2>
+    <p class="sub">Necessidade de água estimada pela irradiação de São Paulo (LABREN/INPE) e pelos dias de chuva (INMET).</p>
+    <div class="grid dois">
+      <div class="card grafico">
+        <h3>Consumo de energia (kWh/mês) e geração do painel de 100 Wp</h3>
+        <div id="gEnergia"></div>
+        <div class="legenda">
+          <span style="--c:var(--a1)">A1 Convencional</span>
+          <span style="--c:var(--a2)">A2 Rede + sensores</span>
+          <span style="--c:var(--a3)">A3 Solar + sensores</span>
+          <span style="--c:#1E7A3D">Geração solar (linha)</span>
+        </div>
+      </div>
+      <div class="card grafico">
+        <h3>Água aplicada na horta (m³/mês)</h3>
+        <div id="gAgua"></div>
+        <div class="legenda">
+          <span style="--c:var(--a1)">A1 Timer fixo</span>
+          <span style="--c:var(--agua)">A2 e A3 com sensores</span>
+          <span style="--c:#9cc3e6">Dias de chuva (escala à direita)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="comparacao">
+    <h2>Comparação das alternativas</h2>
+    <p class="sub">Mesma necessidade (irrigar 150 m² de canteiros) e mesmo período de referência (ano típico, valores por mês).</p>
+    <div class="card tabela-wrap"><table id="tabComparacao"></table></div>
+    <div class="card tabela-wrap" style="margin-top:14px">
+      <table>
+        <thead><tr><th>Critério</th><th>A1 Convencional</th><th>A2 Rede + sensores</th><th>A3 Solar + sensores</th></tr></thead>
+        <tbody>
+          <tr><td><b>Viabilidade técnica e condições</b></td>
+            <td>Simples, mas exige ponto de energia no terreno (padrão de entrada monofásico e vistoria da Enel).</td>
+            <td>Exige o mesmo ponto de energia, mais Wi-Fi ou rede móvel para o ESP32.</td>
+            <td>Não depende da rede. Exige local com sol entre 9 h e 15 h para o painel e caixa d'água elevada.</td></tr>
+          <tr><td><b>Impactos ambientais</b></td>
+            <td>Maior uso de água (irriga em dias de chuva) e emissões da rede.</td>
+            <td>Reduz água e energia, mas ainda usa a rede.</td>
+            <td>Zero emissão na operação. Bateria e painel exigem descarte correto no fim da vida útil.</td></tr>
+          <tr><td><b>Benefícios para a comunidade</b></td>
+            <td>Baixo custo de compra.</td>
+            <td>Economia de água e dados de consumo no dashboard.</td>
+            <td>Sem conta de luz, funciona em terrenos sem energia, dados no dashboard e uso educativo da energia solar.</td></tr>
+          <tr><td><b>Limitações</b></td>
+            <td>A conta mínima de 30 kWh/mês é cobrada mesmo com consumo de cerca de 6 kWh.</td>
+            <td>A economia de energia não reduz a conta, por causa do custo de disponibilidade.</td>
+            <td>Maior investimento inicial se a horta já tem energia. Bomba menor, que leva mais tempo para encher a caixa. Risco de furto do painel.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="simulador">
+    <h2>Simulador de cenários</h2>
+    <p class="sub">Altere as premissas para ver como os indicadores mudam. As fórmulas são as mesmas do script Python.</p>
+    <div class="card">
+      <div class="grid sim-form">
+        <div><label>Área irrigada: <output id="oArea"></output> m²</label><input type="range" id="sArea" min="50" max="400" step="10"></div>
+        <div><label>Tarifa com tributos: R$ <output id="oTarifa"></output>/kWh</label><input type="range" id="sTarifa" min="0.60" max="1.60" step="any"></div>
+        <div><label>Potência do painel: <output id="oPainel"></output> Wp</label><input type="range" id="sPainel" min="30" max="200" step="10"></div>
+        <div><label>Performance ratio: <output id="oPR"></output></label><input type="range" id="sPR" min="0.50" max="0.85" step="0.01"></div>
+      </div>
+      <button class="btn-reset" id="btnReset">Voltar às premissas do projeto</button>
+      <div class="grid sim-res" id="simRes"></div>
+    </div>
+  </section>
+
+  <section id="monitoramento">
+    <h2>Monitoramento do canteiro (dados simulados)</h2>
+    <p class="sub">Exemplo do que o ESP32 publica a cada 5 minutos via MQTT, no mesmo formato do projeto de Arquitetura de
+      Computadores, acrescido dos dados de energia medidos pelo INA219. Um dia típico de fevereiro foi simulado.</p>
+    <div class="status" id="status"></div>
+    <div class="grid dois" style="margin-top:14px">
+      <div class="card grafico">
+        <h3>Umidade do solo (%) e bomba ligada — dia simulado</h3>
+        <div id="gDia"></div>
+        <div class="legenda"><span style="--c:var(--agua)">Umidade do solo</span><span style="--c:var(--a3)">Bomba ligada</span><span style="--c:#c33">Limite para irrigar (35%)</span></div>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 6px;font-size:15.5px">Última mensagem recebida</h3>
+        <pre class="json" id="jsonMsg"></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="diagrama" class="diagrama">
+    <h2>Diagrama da solução</h2>
+    <p class="sub">Fonte de energia → sensores e dados de consumo → lógica e processamento no ESP32 → consumidores e indicadores.</p>
+    <img src="docs/diagrama_solucao.svg" alt="Diagrama de blocos da horta comunitária com bombeamento solar">
+  </section>
+
+  <section id="premissas">
+    <h2>Premissas e fontes</h2>
+    <details open><summary>Premissas usadas nos cálculos</summary><div class="tabela-wrap"><table id="tabPremissas"></table></div></details>
+    <details><summary>Fontes de dados</summary>
+      <ul>
+        <li>LABREN/CCST/INPE — Atlas Brasileiro de Energia Solar, 2ª ed.: irradiação no plano inclinado, ponto 5728 (lat. −23,50; lon. −46,65).</li>
+        <li>INMET — Normais climatológicas 1991–2020, Mirante de Santana (São Paulo): dias de chuva ≥ 1 mm e temperatura média.</li>
+        <li>Embrapa Hortaliças — evapotranspiração de referência e manejo de irrigação de hortaliças.</li>
+        <li>ANEEL / Enel SP — tarifa B1 de 2025, reajuste de 2026 e fatura de fev/2026 (fator de tributos).</li>
+        <li>ANEEL — REN 1.000/2021, art. 291 (custo de disponibilidade de 30 kWh para ligação monofásica).</li>
+        <li>MCTI/SIRENE — fator médio de emissão de CO₂ do SIN (jan a abr/2025).</li>
+        <li>Lojas online (nov/2026) — preços de referência de bomba, kit solar e componentes.</li>
+      </ul>
+      <p class="sub">Links completos no arquivo <code>docs/referencias_e_limitacoes.md</code> do repositório.</p>
+    </details>
+  </section>
+</main>
+<footer>Neighborhood Action Dashboard • Contribuição de Soluções em Energias Renováveis e Sustentáveis • Global Solution 2026.2 • FIAP</footer>
+<div class="tooltip" id="tooltip"></div>
+
+<script src="dados/resultados.js"></script>
+<script src="assets/calculos.js"></script>
+<script src="assets/dashboard.js"></script>
+</body>
+</html>

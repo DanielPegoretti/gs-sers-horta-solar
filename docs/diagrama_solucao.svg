@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" font-family="DejaVu Sans, Arial, sans-serif">
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+    <marker id="setaE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#C77700"/>
+    </marker>
+    <marker id="setaA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1F6FB2"/>
+    </marker>
+    <marker id="setaD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4B1F7E"/>
+    </marker>
+    <style>
+      .t{font-size:15px;font-weight:bold;fill:#222}
+      .s{font-size:12px;fill:#444}
+      .n{font-size:13px;font-weight:bold;fill:#fff}
+      .lbl{font-size:11px;fill:#333}
+      .grp{font-size:13px;font-weight:bold;letter-spacing:.5px}
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#ffffff"/>
+  <text x="30" y="38" style="font-size:22px;font-weight:bold;fill:#4B1F7E">Diagrama de blocos — Horta comunitária com bombeamento solar e irrigação automatizada</text>
+  <text x="30" y="62" class="s">Neighborhood Action Dashboard • SERS • Números nos círculos = ordem do ciclo (a cada 5 min, como no projeto de Arquitetura de Computadores)</text>
+
+  <!-- grupos -->
+  <rect x="20" y="85" width="300" height="560" rx="14" fill="#FFF6E5" stroke="#E8B04B"/>
+  <text x="36" y="108" class="grp" fill="#B26A00">1  FONTE DE ENERGIA</text>
+  <rect x="340" y="85" width="300" height="560" rx="14" fill="#EAF3FB" stroke="#7DB1DD"/>
+  <text x="356" y="108" class="grp" fill="#1F6FB2">2  SENSORES E DADOS DE CONSUMO</text>
+  <rect x="660" y="85" width="290" height="560" rx="14" fill="#F1EBF8" stroke="#9B7BC8"/>
+  <text x="676" y="108" class="grp" fill="#4B1F7E">3  LÓGICA E PROCESSAMENTO</text>
+  <rect x="970" y="85" width="290" height="560" rx="14" fill="#EAF6EE" stroke="#6DBB86"/>
+  <text x="986" y="108" class="grp" fill="#1E7A3D">4  CONSUMIDORES E DASHBOARD</text>
+
+  <!-- fonte -->
+  <rect x="40" y="125" width="260" height="80" rx="10" fill="#fff" stroke="#C77700" stroke-width="2"/>
+  <text x="56" y="150" class="t">Painel fotovoltaico 100 Wp</text>
+  <text x="56" y="170" class="s" style="font-size:11.5px">gera ≈ 8,6 a 11 kWh/mês (São Paulo)</text>
+  <text x="56" y="187" class="s">irradiação LABREN/INPE; PR = 0,70</text>
+  <rect x="40" y="245" width="260" height="70" rx="10" fill="#fff" stroke="#C77700" stroke-width="2"/>
+  <text x="56" y="270" class="t">Controlador de carga PWM</text>
+  <text x="56" y="290" class="s">12 V / 30 A — protege a bateria</text>
+  <rect x="40" y="355" width="260" height="70" rx="10" fill="#fff" stroke="#C77700" stroke-width="2"/>
+  <text x="56" y="380" class="t">Bateria VRLA 12 V 7 Ah</text>
+  <text x="56" y="400" class="s">ESP32 à noite + reserva de 2 dias</text>
+  <rect x="40" y="465" width="260" height="80" rx="10" fill="#fff" stroke="#C77700" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="56" y="490" class="t">Sem ligação à rede</text>
+  <text x="56" y="510" class="s">Alternativas A1/A2 (comparação) usam</text>
+  <text x="56" y="527" class="s">rede Enel SP + padrão monofásico</text>
+  <line x1="170" y1="205" x2="170" y2="243" stroke="#C77700" stroke-width="2.5" marker-end="url(#setaE)"/>
+  <line x1="170" y1="315" x2="170" y2="353" stroke="#C77700" stroke-width="2.5" marker-end="url(#setaE)"/>
+
+  <!-- sensores -->
+  <rect x="360" y="125" width="260" height="62" rx="10" fill="#fff" stroke="#1F6FB2" stroke-width="2"/>
+  <text x="376" y="150" class="t">Umidade do solo</text>
+  <text x="376" y="170" class="s">Capacitivo v1.2 → ADC1 (GPIO34)</text>
+  <rect x="360" y="200" width="260" height="62" rx="10" fill="#fff" stroke="#1F6FB2" stroke-width="2"/>
+  <text x="376" y="225" class="t">Clima: BME280 + BH1750</text>
+  <text x="376" y="245" class="s">temperatura, umidade do ar, luz (I²C)</text>
+  <rect x="360" y="275" width="260" height="62" rx="10" fill="#fff" stroke="#1F6FB2" stroke-width="2"/>
+  <text x="376" y="300" class="t">Nível da caixa d'água</text>
+  <text x="376" y="320" class="s">boia (entrada digital)</text>
+  <rect x="360" y="350" width="260" height="80" rx="10" fill="#fff" stroke="#1F6FB2" stroke-width="2.5"/>
+  <text x="376" y="375" class="t">Medição de energia INA219</text>
+  <text x="376" y="395" class="s">corrente e tensão (bomba e painel)</text>
+  <text x="376" y="413" class="s">→ kWh medidos (E = P × t / 1000)</text>
+  <rect x="360" y="445" width="260" height="62" rx="10" fill="#fff" stroke="#1F6FB2" stroke-width="2"/>
+  <text x="376" y="470" class="t">Tensão da bateria</text>
+  <text x="376" y="490" class="s">divisor resistivo → ADC1</text>
+
+  <!-- lógica -->
+  <circle cx="805" cy="140" r="15" fill="#4B1F7E"/><text x="800" y="145" class="n">1</text>
+  <rect x="680" y="165" width="250" height="215" rx="10" fill="#fff" stroke="#4B1F7E" stroke-width="2.5"/>
+  <text x="696" y="190" class="t">ESP32 — automação</text>
+  <text x="696" y="213" class="lbl">Liga a bomba somente se:</text>
+  <text x="704" y="233" class="lbl">• umidade do solo &lt; limite da cultura</text>
+  <text x="704" y="251" class="lbl">• não choveu (sensor de clima)</text>
+  <text x="704" y="269" class="lbl">• há água na caixa (boia)</text>
+  <text x="704" y="287" class="lbl">• bateria &gt; 11,8 V ou sol disponível</text>
+  <text x="696" y="311" class="lbl">Prioriza bombear entre 9 h e 15 h</text>
+  <text x="696" y="329" class="lbl">(maior geração solar).</text>
+  <text x="696" y="353" class="lbl">Desliga ao atingir o volume do dia.</text>
+  <circle cx="805" cy="410" r="15" fill="#4B1F7E"/><text x="800" y="415" class="n">2</text>
+  <rect x="680" y="435" width="250" height="110" rx="10" fill="#fff" stroke="#4B1F7E" stroke-width="2.5"/>
+  <text x="696" y="460" class="t">Processamento</text>
+  <text x="696" y="482" class="lbl">kWh = P × t / 1000 • litros = vazão × t</text>
+  <text x="696" y="500" class="lbl">acumula por dia e por mês</text>
+  <text x="696" y="518" class="lbl">monta JSON e publica via Wi-Fi</text>
+  <text x="696" y="536" class="lbl">(MQTT/TLS: horta/canteiro01/energia)</text>
+
+  <!-- consumidores -->
+  <circle cx="1115" cy="140" r="15" fill="#1E7A3D"/><text x="1110" y="145" class="n">3</text>
+  <rect x="990" y="165" width="250" height="70" rx="10" fill="#fff" stroke="#1E7A3D" stroke-width="2"/>
+  <text x="1006" y="190" class="t">Bomba solar 12 V / 100 W</text>
+  <text x="1006" y="210" class="s">480 L/h • acionada por MOSFET</text>
+  <rect x="990" y="255" width="250" height="62" rx="10" fill="#fff" stroke="#1E7A3D" stroke-width="2"/>
+  <text x="1006" y="280" class="t">Caixa d'água elevada</text>
+  <text x="1006" y="300" class="s">500 L → irrigação por gravidade</text>
+  <rect x="990" y="337" width="250" height="62" rx="10" fill="#fff" stroke="#1E7A3D" stroke-width="2"/>
+  <text x="1006" y="362" class="t">Gotejamento — 150 m²</text>
+  <text x="1006" y="382" class="s">eficiência de 90% (Embrapa)</text>
+  <circle cx="1115" cy="425" r="15" fill="#1E7A3D"/><text x="1110" y="430" class="n">4</text>
+  <rect x="990" y="450" width="250" height="175" rx="10" fill="#1E7A3D"/>
+  <text x="1006" y="475" class="n" style="font-size:12px">Neighborhood Action Dashboard</text>
+  <text x="1006" y="498" style="font-size:12px;fill:#fff">• Consumo de energia (kWh/mês)</text>
+  <text x="1006" y="516" style="font-size:12px;fill:#fff">• Economia energética (%)</text>
+  <text x="1006" y="534" style="font-size:12px;fill:#fff">• Redução de custo (R$/mês)</text>
+  <text x="1006" y="552" style="font-size:12px;fill:#fff">• Participação renovável (%)</text>
+  <text x="1006" y="570" style="font-size:12px;fill:#fff">• Emissões evitadas (kg CO₂e/ano)</text>
+  <text x="1006" y="588" style="font-size:12px;fill:#fff">• Água economizada (m³/mês)</text>
+  <text x="1006" y="606" style="font-size:12px;fill:#fff">• Bomba ligada (h/dia)</text>
+
+  <!-- setas energia -->
+  <path d="M300,390 L330,390 L330,600 L955,600 L955,222 L988,222" fill="none" stroke="#C77700" stroke-width="2.5" marker-end="url(#setaE)"/>
+  <text x="560" y="592" class="lbl" fill="#C77700" style="fill:#B26A00">energia 12 V para a bomba, ESP32 e sensores</text>
+  <!-- setas dados sensores -> ESP32 -->
+  <line x1="620" y1="156" x2="678" y2="200" stroke="#1F6FB2" stroke-width="2" marker-end="url(#setaA)"/>
+  <line x1="620" y1="231" x2="678" y2="235" stroke="#1F6FB2" stroke-width="2" marker-end="url(#setaA)"/>
+  <line x1="620" y1="306" x2="678" y2="290" stroke="#1F6FB2" stroke-width="2" marker-end="url(#setaA)"/>
+  <line x1="620" y1="390" x2="678" y2="470" stroke="#1F6FB2" stroke-width="2" marker-end="url(#setaA)"/>
+  <line x1="620" y1="476" x2="678" y2="500" stroke="#1F6FB2" stroke-width="2" marker-end="url(#setaA)"/>
+  <!-- ESP32 -> processamento -->
+  <line x1="805" y1="380" x2="805" y2="393" stroke="#4B1F7E" stroke-width="2"/>
+  <line x1="805" y1="426" x2="805" y2="433" stroke="#4B1F7E" stroke-width="2" marker-end="url(#setaD)"/>
+  <!-- comando -->
+  <line x1="930" y1="190" x2="988" y2="185" stroke="#4B1F7E" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#setaD)"/>
+  <text x="934" y="178" class="lbl" style="font-size:10.5px">comando</text>
+  <!-- água -->
+  <line x1="1115" y1="235" x2="1115" y2="253" stroke="#1F6FB2" stroke-width="3" marker-end="url(#setaA)"/>
+  <line x1="1115" y1="317" x2="1115" y2="335" stroke="#1F6FB2" stroke-width="3" marker-end="url(#setaA)"/>
+  <!-- dados -> dashboard -->
+  <path d="M930,520 L988,520" fill="none" stroke="#4B1F7E" stroke-width="2.5" marker-end="url(#setaD)"/>
+  <text x="936" y="512" class="lbl" style="font-size:10px">JSON</text>
+
+  <!-- legenda -->
+  <rect x="20" y="660" width="1240" height="82" rx="10" fill="#FAFAFA" stroke="#DDD"/>
+  <text x="36" y="684" class="t" style="font-size:13px">Legenda</text>
+  <line x1="36" y1="706" x2="86" y2="706" stroke="#C77700" stroke-width="2.5" marker-end="url(#setaE)"/><text x="94" y="710" class="lbl">energia elétrica (12 V CC)</text>
+  <line x1="290" y1="706" x2="340" y2="706" stroke="#1F6FB2" stroke-width="2.5" marker-end="url(#setaA)"/><text x="348" y="710" class="lbl">dados dos sensores / água</text>
+  <line x1="540" y1="706" x2="590" y2="706" stroke="#4B1F7E" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#setaD)"/><text x="598" y="710" class="lbl">comando de acionamento</text>
+  <line x1="790" y1="706" x2="840" y2="706" stroke="#4B1F7E" stroke-width="2.5" marker-end="url(#setaD)"/><text x="848" y="710" class="lbl">dados processados → dashboard</text>
+  <text x="36" y="732" class="lbl">Ciclo: (1) ler sensores e decidir → (2) calcular kWh e litros e publicar → (3) acionar a bomba → (4) atualizar os indicadores. Valores = projeções condicionadas às premissas.</text>
+</svg>
